@@ -1,0 +1,54 @@
+body,html {
+  height: 100%;
+  margin: 0;
+}
+#map {
+  float: left;
+  background-color: gray;
+  height: 100%;
+  width: 70%;
+}
+#info{
+ float: right;
+ background-color: blue;
+ height: 100%;
+ width: 30%;
+}
+footer{
+ font-style: italic;
+ color: white;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+main{
+  height:90%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+header{
+  height: auto;
+}
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+li{
+  float: left;
+}
+li a{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+li a:hover{
+  background-color: #111;
+}

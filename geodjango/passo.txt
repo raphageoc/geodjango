@@ -1,0 +1,56 @@
+1 - instalar o geodjango
+  1.1. bibliotecas espaciais
+       sudo apt-get install binutils libproj-dev gdal-bin
+  1.2 banco de dados espacial
+       postgis
+2 - complementar a estrutura
+   2.1 criar pasta template dentro do geoapp
+   2.2 criar pasta geoapp dento da template
+   2.3 criar pasta static dentro do geoapp
+   2.4 criar pasta geoapp dentro da static
+3 - configurar o projeto (geodjango/geodjango/settings.py)
+      3.1 APP
+        3.1.1 adicionar biblioteca gis
+            'django.contrib.gis',
+        3.1.2 adicionar o app no projeto
+            'geoapp',
+      3.2 Banco de dados
+        3.2.1 configurar um banco de dados espacial
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.contrib.gis.db.backends.postgis',
+                'NAME': 'geodjango',
+                'USER': 'postgres',
+                'PASSWORD': 'postgres',
+                'HOST':'127.0.0.1',
+                'PORT':'5432',
+            }
+        }
+      3.3 definir o caminho do arquivo estático
+          STATIC_ROOT = '/home/rapha/Dropbox/Doutorado/disciplinas/Docencia/geodjango/geoapp/static/geoapp'
+4 - URL
+    4.1 criar arquivo url.py dentro da pastas geodjango/geoapp com o conteudo:
+        from django.conf.urls import url
+        from . import views
+        from django.conf import settings
+        from django.conf.urls.static import static
+
+        urlpatterns = [
+            url(r'', views.site, name='site'), %%direciona a url principal para a view site
+        ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) %%para usar arquivos estaticos no servidor teste
+    4.2 editar o arquivo url.py da pasta geodjango/geodjango adicionar o caminho para o url do app1
+        from django.conf.urls import include, url
+
+        urlpatterns = [
+          url(r'^admin/', admin.site.urls),
+          url(r'', include('geoapp.urls')),
+
+       ]
+
+5 - view
+    5.1 criar uma view que retorna o site index.html
+
+        from __future__ import unicode_literals
+        from django.shortcuts import render
+            def site(request):
+            return render(request, 'geoapp/index.html', {})
